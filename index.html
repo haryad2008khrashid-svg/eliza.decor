@@ -9,35 +9,39 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #050508; color: #ffffff; min-height: 100vh; display: flex; justify-content: center; padding: 25px 15px; position: relative; overflow-x: hidden; }
-        
+        body { background-color: #050508; color: #ffffff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 25px 15px; position: relative; overflow-x: hidden; }
+
         /* Galaxy Background */
         body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(3px 3px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(4px 4px at 80px 120px, #e60023, rgba(0,0,0,0)); background-size: 350px 350px; opacity: 0.95; z-index: -2; animation: galaxyTwinkle 12s infinite linear; }
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 20%, rgba(230, 0, 35, 0.2) 0%, rgba(5, 5, 8, 0.85) 75%); z-index: -1; }
         @keyframes galaxyTwinkle { 0% { transform: translateY(0); } 100% { transform: translateY(-350px); } }
 
-        .container { width: 100%; max-width: 480px; text-align: center; display: flex; flex-direction: column; align-items: center; z-index: 1; }
-        .logo-box { width: 125px; height: 125px; margin-bottom: 15px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #e60023, #111, #ffffff); box-shadow: 0 0 25px rgba(230, 0, 35, 0.4); }
-        .logo-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        h1 { font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+        .container { width: 100%; max-width: 520px; text-align: center; display: flex; flex-direction: column; align-items: center; z-index: 1; }
+        .logo-box { width: 100px; height: 100px; margin-bottom: 12px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #e60023, #111, #ffffff); box-shadow: 0 0 25px rgba(230, 0, 35, 0.4); animation: pulseGlow 3s infinite ease-in-out; }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(230, 0, 35, 0.4); } 50% { box-shadow: 0 0 35px rgba(230, 0, 35, 0.7); } }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background-color: #000; }
+        
+        h1 { font-size: 24px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 4px; color: #ffffff; }
         h1 span { color: #e60023; }
-        .subtitle { font-size: 14px; color: #d1d1d1; margin-bottom: 25px; font-weight: 600; }
+        .subtitle { font-size: 13px; color: #d1d1d1; margin-bottom: 25px; font-weight: 600; }
 
-        .links-container { width: 100%; display: flex; flex-direction: column; gap: 14px; }
-        .link-card { display: flex; flex-direction: column; padding: 16px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; color: #ffffff; text-decoration: none; backdrop-filter: blur(12px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); transition: 0.3s; cursor: pointer; }
-        .link-content { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .link-icon { color: #e60023; font-size: 20px; margin-left: 10px; }
-        
-        /* Gallery Styles */
-        .gallery-wrapper { position: relative; margin-top: 15px; width: 100%; display: none; }
-        .gallery-container { display: flex; overflow-x: auto; gap: 10px; scroll-behavior: smooth; padding-bottom: 5px; }
-        .gallery-container::-webkit-scrollbar { display: none; }
-        .gallery-item { flex: 0 0 100px; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid #e60023; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .scroll-btn { position: absolute; top: 35%; background: rgba(230, 0, 35, 0.9); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; z-index: 10; }
-        .prev-btn { right: -5px; }
-        .next-btn { left: -5px; }
+        .section-title { width: 100%; text-align: right; font-size: 14px; color: #e60023; font-weight: 700; margin: 10px 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(230, 0, 35, 0.3); padding-bottom: 6px; }
+
+        /* Showcase Styles */
+        .showcase-wrapper { position: relative; width: 100%; display: flex; align-items: center; padding: 0 5px; margin-bottom: 20px; }
+        .showcase-scroll-container { width: 100%; display: flex; gap: 14px; overflow-x: auto; padding-bottom: 15px; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(230, 0, 35, 0.6) rgba(255, 255, 255, 0.05); }
+        .media-card { min-width: 240px; height: 320px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); scroll-snap-align: start; flex-shrink: 0; }
+        .media-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        .scroll-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.85); color: #ffffff; border: 1px solid rgba(230, 0, 35, 0.6); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; }
+        .scroll-right { right: -12px; }
+        .scroll-left { left: -12px; }
+
+        /* Navigation Button */
+        .nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(230, 0, 35, 0.4); border-radius: 16px; color: #ffffff; text-decoration: none; font-weight: 600; transition: 0.2s; }
+        .nav-btn:hover { background: rgba(230, 0, 35, 0.15); border-color: rgba(230, 0, 35, 0.8); }
+
+        footer { margin-top: 30px; font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
@@ -47,36 +51,35 @@
         <h1>ELIZA <span>DECOR</span></h1>
         <p class="subtitle">کەشخەی ماڵەکەت تەنیا لە Eliza دەبینیت</p>
 
-        <div class="links-container">
-            <a href="tel:07702681414" class="link-card" style="flex-direction: row; align-items: center; justify-content: space-between;">
-                <div style="display:flex; align-items:center"><i class="fa-solid fa-phone link-icon"></i> پەیوەندیی ڕاستەوخۆ</div><i class="fa-solid fa-chevron-left"></i>
-            </a>
-
-            <!-- بەشی ١ -->
-            <div class="link-card" onclick="document.getElementById('g1').style.display = document.getElementById('g1').style.display === 'block' ? 'none' : 'block'">
-                <div class="link-content">
-                    <div><i class="fa-solid fa-images link-icon"></i> نموونەی کارەکان بەشی ١</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="gallery-wrapper" id="g1">
-                    <button class="scroll-btn prev-btn" onclick="event.stopPropagation(); document.getElementById('gal1').scrollBy(200, 0)"><i class="fa-solid fa-chevron-right"></i></button>
-                    <div class="gallery-container" id="gal1">
-                        <script>
-                            for(let i=1; i<=27; i++) { document.write(`<div class="gallery-item"><img src="${i}.jpg"></div>`); }
-                        </script>
-                    </div>
-                    <button class="scroll-btn next-btn" onclick="event.stopPropagation(); document.getElementById('gal1').scrollBy(-200, 0)"><i class="fa-solid fa-chevron-left"></i></button>
-                </div>
-            </div>
-
-            <!-- بەشی ٢ -->
-            <a href="https://haryad2008khrashid-svg.github.io/ElizaDecore/" target="_blank" class="link-card" style="flex-direction: row; align-items: center; justify-content: space-between;">
-                <div style="display:flex; align-items:center"><i class="fa-solid fa-images link-icon"></i> نموونەی کارەکان بەشی ٢</div><i class="fa-solid fa-chevron-left"></i>
-            </a>
+        <div class="section-title">
+            <i class="fa-solid fa-images"></i>
+            <span>نموونەی کارەکان بەشی 1 (١ بۆ ٢٧)</span>
         </div>
-        
-        <footer style="margin-top:35px; color:#888; font-size:12px;">© ELIZA DECOR - All Rights Reserved</footer>
+
+        <div class="showcase-wrapper">
+            <button class="scroll-arrow scroll-right" onclick="scrollGallery(260)"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="showcase-scroll-container" id="galleryContainer">
+                <script>
+                    for(let i=1; i<=27; i++) {
+                        document.write(`<div class="media-card"><img src="${i}.jpg" alt="Work ${i}" loading="lazy"></div>`);
+                    }
+                </script>
+            </div>
+            <button class="scroll-arrow scroll-left" onclick="scrollGallery(-260)"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+
+        <a href="profile.html" class="nav-btn">
+            <span>بینینی بەشی ٢ی کارەکان</span>
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <footer>© ELIZA DECOR - All Rights Reserved</footer>
     </div>
 
+    <script>
+        function scrollGallery(amount) {
+            document.getElementById('galleryContainer').scrollBy({ left: amount, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
