@@ -3,84 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموونەی کارەکان بەشی 1 | Eliza Decor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Eliza Decor | ئیلیزا دیکۆر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
+
         body {
             background-color: #050508;
             color: #ffffff;
-            padding: 20px;
-            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 15px;
+            position: relative;
+            overflow-x: hidden;
         }
-        h2 {
-            margin-bottom: 25px;
+
+        /* Galaxy / Starry Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(3px 3px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 80px 120px, #e60023, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 150px 50px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 220px 200px, #ff4d6d, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 310px 100px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 380px 280px, #e60023, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 450px 180px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 350px 350px;
+            opacity: 0.95;
+            z-index: -2;
+            animation: galaxyTwinkle 12s infinite linear;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 20%, rgba(230, 0, 35, 0.2) 0%, rgba(5, 5, 8, 0.85) 75%);
+            z-index: -1;
+        }
+
+        @keyframes galaxyTwinkle {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-350px); }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(-45deg, #ffffff, rgba(230, 0, 35, 1), rgba(0, 0, 0, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .shooting-star:nth-child(1) { top: 10%; left: 80%; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 25%; left: 60%; animation-delay: 1.8s; }
+        .shooting-star:nth-child(3) { top: 5%; left: 40%; animation-delay: 3.5s; }
+
+        @keyframes tail {
+            0% { width: 0; opacity: 0; }
+            30% { width: 120px; opacity: 1; }
+            100% { width: 0; opacity: 0; }
+        }
+
+        @keyframes shooting {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); }
+            100% { transform: translateX(-400px) translateY(400px) rotate(-45deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        /* Logo Area */
+        .logo-box {
+            position: relative;
+            width: 125px;
+            height: 125px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #e60023, #111, #ffffff);
+            box-shadow: 0 0 25px rgba(230, 0, 35, 0.4);
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(230, 0, 35, 0.4); }
+            50% { box-shadow: 0 0 35px rgba(230, 0, 35, 0.7); }
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #000;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+
+        h1 span {
             color: #e60023;
         }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .gallery-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            border-color: #e60023;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 25px;
-            background: #e60023;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
+
+        p.subtitle {
+            font-size: 14px;
+            color: #d1d1d1;
+            margin-bottom: 25px;
             font-weight: 600;
         }
-        .back-btn:hover {
-            background: #ff1a3c;
+
+        /* Interactive Links Section */
+        .links-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            color: #ffffff;
+            text-decoration: none;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        box-shadow 0.2s ease, 
+                        border-color 0.2s ease, 
+                        background 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .link-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(230, 0, 35, 0.6);
+            box-shadow: 0 8px 22px rgba(230, 0, 35, 0.35);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .link-icon {
+            font-size: 22px;
+            width: 28px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.25) rotate(-8deg);
+        }
+
+        .link-title {
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+
+        .arrow-icon {
+            font-size: 12px;
+            color: #777;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .link-card:hover .arrow-icon {
+            transform: translateX(-6px) scale(1.2);
+            color: #e60023;
+        }
+
+        /* Social Colors */
+        .instagram { color: #E1306C; }
+        .whatsapp { color: #25D366; }
+        .viber { color: #7360F2; }
+        .telegram { color: #0088cc; }
+        .facebook { color: #1877F2; }
+        .tiktok { color: #ffffff; }
+
+        .call-btn {
+            background: linear-gradient(135deg, #e60023, #a00014);
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 0, 35, 0.4);
+        }
+
+        .call-btn:hover {
+            background: linear-gradient(135deg, #ff1a3c, #c4001a);
+            box-shadow: 0 8px 25px rgba(230, 0, 35, 0.6);
+        }
+
+        .call-btn .arrow-icon {
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            font-size: 12px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <h2>نموونەی کارەکان - بەشی 1</h2>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
 
-    <div class="gallery-grid">
-        <!-- لێرەدا ٢٧ وێنەکە بە شێوەیەکی ئۆتۆماتیکی و ڕێک ڕیز کراون -->
-        <script>
-            for (let i = 1; i <= 27; i++) {
-                document.write(`
-                    <div class="gallery-item">
-                        <a href="${i}.jpg" target="_blank">
-                            <img src="${i}.jpg" alt="Decor ${i}" loading="lazy">
-                        </a>
-                    </div>
-                `);
-            }
-        </script>
+    <div class="container">
+        <div class="logo-box">
+            <img src="logo.png" alt="Eliza Decor Logo" class="logo-img">
+        </div>
+
+        <h1>ELIZA <span>DECOR</span></h1>
+        <p class="subtitle">کەشخەی ماڵەکەت تەنیا لە Eliza دەبینیت</p>
+
+        <div class="links-container">
+
+            <a href="tel:07702681414" class="link-card call-btn">
+                <div class="link-content">
+                    <i class="fa-solid fa-phone link-icon"></i>
+                    <span class="link-title">پەیوەندیی ڕاستەوخۆ</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="https://wa.me/9647702681414" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-whatsapp link-icon whatsapp"></i>
+                    <span class="link-title">WhatsApp</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="https://www.instagram.com/elizaa_decoor?igsh=c3R6ZXFwMjloMThk" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-instagram link-icon instagram"></i>
+                    <span class="link-title">Instagram</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="https://www.tiktok.com/@eliza.decor1?_r=1&_t=ZS-98MVtxxjoCv" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-tiktok link-icon tiktok"></i>
+                    <span class="link-title">TikTok</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="viber://chat?number=%2B9647702681414" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-viber link-icon viber"></i>
+                    <span class="link-title">Viber</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="https://t.me/+9647702681414" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-telegram link-icon telegram"></i>
+                    <span class="link-title">Telegram</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <a href="https://www.facebook.com/share/192UbUoUDQ/" target="_blank" class="link-card">
+                <div class="link-content">
+                    <i class="fa-brands fa-facebook link-icon facebook"></i>
+                    <span class="link-title">Facebook Page</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <!-- نموونەی کارەکان بەشی 1 (گرێدراوە بە فایلی 1.html) -->
+            <a href="1.html" class="link-card" style="border-color: rgba(230, 0, 35, 0.4);">
+                <div class="link-content">
+                    <i class="fa-solid fa-images link-icon" style="color: #e60023;"></i>
+                    <span class="link-title">نموونەی کارەکان بەشی 1</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+            <!-- نموونەی کارەکان بەشی 2 -->
+            <a href="https://haryad2008khrashid-svg.github.io/ElizaDecore/" target="_blank" class="link-card" style="border-color: rgba(230, 0, 35, 0.4);">
+                <div class="link-content">
+                    <i class="fa-solid fa-images link-icon" style="color: #e60023;"></i>
+                    <span class="link-title">نموونەی کارەکان بەشی 2</span>
+                </div>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </a>
+
+        </div>
+
+        <footer>
+            <p>© ELIZA DECOR - All Rights Reserved</p>
+        </footer>
     </div>
-
-    <a href="index.html" class="back-btn">گەڕانەوە بۆ پەڕەی سەرەکی</a>
 
 </body>
 </html>
